@@ -16,12 +16,12 @@ const mouse = {
 window.addEventListener("mousemove", function(event){
     mouse.x = event.x;
     mouse.y = event.y;
-    console.log(mouse.x, mouse.y);
+    // console.log(mouse.x, mouse.y);
 }); 
 
 ctx.fillStyle = "white";
 ctx.font = "30px Verdana";
-ctx.fillText('A', 0, 30);
+ctx.fillText('A', 60, 30);
 
 const data = ctx.getImageData(0, 0, 100, 100);
 
@@ -44,3 +44,11 @@ class Particle{
         ctx.fill();
     }
 }
+
+function init(){
+    particleArray = [];
+    particleArray.push(new Particle(50, 50 ));
+    particleArray.push(new Particle(45, 60 ));
+}
+init();
+// console.log(particleArray);
