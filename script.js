@@ -35,4 +35,12 @@ class Particle{
         this.baseY = this.x;
         this.density = (Math.random() * 30) + 1;
     }
+
+    draw(){
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.ard(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
 }
