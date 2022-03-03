@@ -10,7 +10,7 @@ let particleArray = [];
 const mouse = {
     x: null,
     y: null,
-    radius: 150
+    radius: 160
 }
 
 window.addEventListener("mousemove", function(event){
@@ -21,9 +21,7 @@ window.addEventListener("mousemove", function(event){
 
 ctx.fillStyle = "white";
 ctx.font = "30px Verdana";
-ctx.strokeStyle = 'white';
-// ctx.strokeRect(0, 0, 100, 100)
-// ctx.fillText('A', 0, 30);
+ctx.fillText('A', 60, 30);
 
 const data = ctx.getImageData(0, 0, 100, 100);
 
@@ -35,13 +33,13 @@ class Particle{
         this.size = 3;
         this.baseX = this.x;
         this.baseY = this.x;
-        this.density = (Math.random() * 300) + 1;
+        this.density = (Math.random() * 600) + 1;
     }
 
     draw(){
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "white";
         ctx.beginPath();
-        ctx.arc (this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
     }
@@ -52,10 +50,9 @@ class Particle{
         let distance = Math.sqrt(dx * dx + dy * dy);
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
-        if (distance < 390){
-            // this.x = forceDirectionX * 3;
-            // this.y = forceDirectionY * 3;
-            this.size = 30;
+        if (distance < 300){
+            this.x += forceDirectionX ;
+            this.y += forceDirectionY ;
         } else {
             this.size =  3;
         }
@@ -64,9 +61,9 @@ class Particle{
 
 function init(){
     particleArray = [];
-    for (let i = 0; i < 1000; i++){
+    for (let i = 0; i < 10; i++){
         let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height ;
         particleArray.push(new Particle(x, y));
     }
 }
