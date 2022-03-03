@@ -39,7 +39,7 @@ class Particle{
     draw(){
         ctx.fillStyle = "white";
         ctx.beginPath();
-        ctx.ard(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc (this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
     }
@@ -47,8 +47,23 @@ class Particle{
 
 function init(){
     particleArray = [];
-    particleArray.push(new Particle(50, 50 ));
-    particleArray.push(new Particle(45, 60 ));
+    for (let i = 0; i < 500; i++){
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.width;
+        particleArray.push(new Particle(x, y));
+    }
 }
+
 init();
 // console.log(particleArray);
+
+
+function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particleArray.length; i++){
+        particleArray[i].draw();
+    }
+
+    requestAnimationFrame(animate);
+}
+animate();
