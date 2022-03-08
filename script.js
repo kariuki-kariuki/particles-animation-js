@@ -35,7 +35,7 @@ class Particle{
         this.size = 2;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.density = (Math.random() * 30) + 1;
+        this.density = (Math.random() * 200) + 1;
     }
 
     draw(){
@@ -63,12 +63,12 @@ class Particle{
         } else {
             if(this.x !== this.baseX){
                 let dx = this.x - this.baseX;
-                this.x -= dx / 10;
+                this.x -= dx / 5;
             }
 
             if(this.y !== this.baseY){
                 let dy = this.y - this.baseY;
-                this.y -= dy / 10;
+                this.y -= dy / 5;
             }
         }
     }
@@ -103,16 +103,18 @@ function animate(){
 }
 animate();
 
-function connect(){
+function connect(){ 
+    let opaityvalue = 1; 
     for (let a = 0; a  < particleArray.length; a++){
         for (let b =a; b < particleArray.length; b++){
             let dx = particleArray[a].x - particleArray[b].x;
             let dy = particleArray[a].y - particleArray[b].y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 60){
-                ctx.strokeStyle = 'blue';
-                ctx.lineWidth = 1;
+            if (distance < 70){
+                opaityvalue = 1 - (distance / 70)
+                ctx.strokeStyle = 'rgba(0, 0, 255,' + opaityvalue + ')' ;
+                ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(particleArray[a].x, particleArray[a].y)
                 ctx.lineTo(particleArray[b].x, particleArray[b].y)
