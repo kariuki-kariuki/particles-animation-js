@@ -35,7 +35,7 @@ class Particle{
         this.size = 3;
         this.baseX = this.x;
         this.baseY = this.x;
-        this.density = (Math.random() * 300) + 1;
+        this.density = (Math.random() * 30) + 1;
     }
 
     draw(){
@@ -52,10 +52,14 @@ class Particle{
         let distance = Math.sqrt(dx * dx + dy * dy);
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
-        if (distance < 390){
-            // this.x = forceDirectionX * 3;
-            // this.y = forceDirectionY * 3;
-            this.size = 30;
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
+        if (distance < mouse.radius){
+            this.x -= directionX;
+            this.y -= directionY;
+            // this.size = 30;
         } else {
             this.size =  3;
         }
